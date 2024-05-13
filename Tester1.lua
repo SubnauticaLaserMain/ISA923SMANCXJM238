@@ -83,7 +83,7 @@ MODULES[Equip_Module] = {
 
 
 		return function(Role, SkinOn)
-			if Role and typeof(SkinOn) == 'boolean' or Role and not SkinOn then
+			if Role and typeof(SkinOn) == 'boolean' then
 				local list = {
 					['The Protector'] = function()
 						local args = {
@@ -220,11 +220,11 @@ local function Spawn_GuiController()
 	local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua', true))()
 
 
-	local Combat = GuiLibrary.ObjectsThatCanBeSaved.CombatWindow.Api
-	local Blatant = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api
-	local Render = GuiLibrary.ObjectsThatCanBeSaved.RenderWindow.Api
-	local Utility = GuiLibrary.ObjectsThatCanBeSaved.UtilityWindow.Api
-	local World = GuiLibrary.ObjectsThatCanBeSaved.WorldWindow.Api
+	local Combat = Library.ObjectsThatCanBeSaved.CombatWindow.Api
+	local Blatant = Library.ObjectsThatCanBeSaved.BlatantWindow.Api
+	local Render = Library.ObjectsThatCanBeSaved.RenderWindow.Api
+	local Utility = Library.ObjectsThatCanBeSaved.UtilityWindow.Api
+	local World = Library.ObjectsThatCanBeSaved.WorldWindow.Api
 
 
 
@@ -250,9 +250,7 @@ local function Spawn_GuiController()
 				Name = 'Equip Role',
 				Function = function(callback)
 					if callback then
-						if SelectedRole and IsUsingSkin then
-							EquipRole_Module(SelectedRole, IsUsingSkin)
-						end
+						EquipRole_Module(SelectedRole, IsUsingSkin)
 					end
 				end
 			})
