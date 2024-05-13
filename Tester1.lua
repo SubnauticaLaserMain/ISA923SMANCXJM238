@@ -177,6 +177,8 @@ MODULES[Equip_Module] = {
 						MakeRole:FireServer(unpack(args))
 					end
 				}
+
+				list[Role]()
 			end
 		end
 	end
@@ -251,6 +253,7 @@ local function Spawn_GuiController()
 				Function = function(callback)
 					if callback then
 						EquipRole_Module(SelectedRole, IsUsingSkin)
+						print('Attempting to Equip: '..SelectedRole..' WITH ARGS: '..tostring(IsUsingSkin))
 					end
 				end
 			})
