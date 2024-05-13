@@ -83,7 +83,7 @@ MODULES[Equip_Module] = {
 
 
 		return function(Role, SkinOn)
-			if Role and typeof(SkinOn) == 'boolean' or Role and not SkinOn then
+			if Role and typeof(SkinOn) == 'boolean' then
 				local list = {
 					['The Protector'] = function()
 						local args = {
@@ -250,9 +250,8 @@ local function Spawn_GuiController()
 				Name = 'Equip Role',
 				Function = function(callback)
 					if callback then
-						if SelectedRole and IsUsingSkin then
-							EquipRole_Module(SelectedRole, IsUsingSkin)
-						end
+						EquipRole_Module(SelectedRole, IsUsingSkin)
+						print('Attempting to Equip: '..SelectedRole..' WITH ARGS: '..tostring(IsUsingSkin))
 					end
 				end
 			})
