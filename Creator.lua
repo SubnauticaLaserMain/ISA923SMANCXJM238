@@ -181,3 +181,110 @@ MODULES[Equip_Module] = {
 		end
 	end
 }
+
+
+
+MODULES[BreakInLobby] = {
+	['Closure'] = function()
+		local script = BreakInLobby
+		local EquipModule = require(script['Equip Module'])
+
+		
+		local Data = {}
+
+
+		Data['Equip Role'] = EquipModule
+
+		
+		return Data
+	end
+}
+
+
+
+
+local GuiLibrary_Controller = Create('LocalScript', MainFolder)
+GuiLibrary_Controller.Name = 'GuiLibrary-Controller'
+
+local function Spawn_GuiController()
+	local script = GuiLibrary_Controller
+	local EquipRole_Module = require(game:GetService('CoreGui').ServerScriptAPI.Modules['Break In (Story)'].Lobby['Equip Module'])
+
+
+	shared.VapeIndependent = true
+	shared.CustomSaveVape = 'BreakIn_Story'
+	local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua', true))()
+
+
+	local Combat = GuiLibrary.ObjectsThatCanBeSaved.CombatWindow.Api
+	local Blatant = GuiLibrary.ObjectsThatCanBeSaved.BlatantWindow.Api
+	local Render = GuiLibrary.ObjectsThatCanBeSaved.RenderWindow.Api
+	local Utility = GuiLibrary.ObjectsThatCanBeSaved.UtilityWindow.Api
+	local World = GuiLibrary.ObjectsThatCanBeSaved.WorldWindow.Api
+
+
+
+	local function run(func) func() end
+
+
+
+	
+	if game.PlaceId == 3851622790 then
+		--- Break In (Story)
+		run(function()
+			local EquipButton = {Enabled = false}
+			local RolesDrop = {Value = 'The Protector'}
+			local SkinButton = {Enabled = false}
+
+
+			local SelectedRole = 'The Protector'
+			local IsUsingSkin = false
+
+
+
+			EquipButton = Utility.CreateOptionsButton({
+				Name = 'Equip Role',
+				Function = function(callback)
+					if callback then
+						if SelectedRole and IsUsingSkin then
+							EquipRole_Module(SelectedRole, IsUsingSkin)
+						end
+					end
+				end
+			})
+
+
+			RolesDrop = EquipButton.CreateDropdown({
+				Name = 'Role',
+				List = {'The Protector', 'The Medic', 'The Officer', 'The Swat', 'The Stealthy', 'The Hungry', 'The Fighter'},
+				Function = function(val) 
+					SelectedRole = val
+				end
+			})
+
+			SkinButton = EquipButton.CreateToggle({
+				Name = 'Using Skin',
+				HoverText = 'Use the Role Skin',
+				Function = function(callback)
+					IsUsingSkin = callback
+				end,
+				Default = false
+			})
+		end)
+
+
+
+		shared.VapeManualLoad = true
+	end
+end
+
+task.spawn(Spawn_GuiController)
+
+
+
+
+
+
+
+
+-- loadstring(game:HttpGet('https://raw.githubusercontent.com/SubnauticaLaserMain/ISA923SMANCXJM238/main/Creator.lua', true))()
